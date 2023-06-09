@@ -1,5 +1,7 @@
-from ex115.lib import *
-
+from arquivo import *
+from lib import *
+from tkinter import *
+from tkinter import messagebox
 
 def arquivoExiste(nome):
     try:
@@ -21,29 +23,17 @@ def criarArquivo(nome):
         print(F'Arquivo {nome} criado com sucesso.')
 
 
-def lerArquivo(nome):
-    try:
-        a = open(nome, 'rt')
-    except:
-        print(f'Erro ao ler o arquivo.')
-    else:
-        cabeçalho('Pessoas Cadastradas')
-        print(a.read())
-    finally:
-        a.close()
 
-
-def cadastrar(arq, nome='<desconhecido>', idade=0):
+def cadastrar(arq, tarefa='<desconhecido>', dias=0):
     try:
         a = open(arq, 'at')
     except:
-        print(f'Houve um erro na abertura do arquivo.')
+        messagebox.showinfo(title=None, message=f'Houve um erro na abertura do arquivo.')
     else:
         try:
-            a.write(f'{nome:<30}{idade:>5} anos\n')
+            a.write(f'{tarefa:<30} Data limite: {dias:>5}\n')
         except:
-            print(f'Houve um erro na hora de inscrever os dados.')
+            messagebox.showinfo(title=None, message='Houve um erro na hora de inscrever os dados.')
         else:
-            print(f'Novo registro de {nome} adicionado.')
+            messagebox.showinfo(title=None, message=f'Novo registro de {tarefa} adicionado.')
             a.close()
-
